@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +13,8 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer? debounce;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -21,12 +25,15 @@ class SearchPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 25, right: 25),
         child: Column(
           children: [
-            SearchField(
-              function: (query) {
-                BlocProvider.of<SearchCharacterBloc>(context)
-                    .add(LoadSearchCharacter(query));
-              },
-            ),
+            SearchField(function: (query) {
+              if (query.length > 0) {
+                if (debounce?.isActive ?? false) debounce?.cancel();
+                debounce = Timer(const Duration(milliseconds: 1000), () {
+                  BlocProvider.of<SearchCharacterBloc>(context)
+                      .add(LoadSearchCharacter(query));
+                });
+              }
+            }),
             const SizedBox(height: 15),
             BlocBuilder<SearchCharacterBloc, SearchCharacterState>(
               builder: (context, state) {
