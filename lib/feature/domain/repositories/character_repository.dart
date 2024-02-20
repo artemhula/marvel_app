@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:marvel_app/error/failure.dart';
+import 'package:marvel_app/core/error/failure.dart';
 import 'package:marvel_app/feature/domain/entities/character_entity.dart';
 
 abstract class CharacterRepository {
