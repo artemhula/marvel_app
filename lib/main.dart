@@ -19,7 +19,6 @@ class MarvelApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsFlutterBinding.ensureInitialized();
     return MultiBlocProvider(
       providers: [
         BlocProvider<CharacterListBloc>(
