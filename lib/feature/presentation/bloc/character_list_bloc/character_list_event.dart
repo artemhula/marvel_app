@@ -8,5 +8,3 @@ sealed class CharacterListEvent extends Equatable {
 }
 
 class LoadCharacterList extends CharacterListEvent {}
-
-class LoadMoreCharacterList extends CharacterListEvent {}

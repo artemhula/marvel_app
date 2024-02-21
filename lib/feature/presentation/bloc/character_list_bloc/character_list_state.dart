@@ -7,15 +7,27 @@ sealed class CharacterListState extends Equatable {
   List<Object> get props => [];
 }
 
-class CharacterListInitial extends CharacterListState {}
+class CharacterListInitial extends CharacterListState {
+  @override
+  List<Object> get props => [];
+}
 
-class CharacterListLoading extends CharacterListState {}
+class CharacterListLoading extends CharacterListState {
+
+  @override
+  List<Object> get props => [];
+}
 
 class CharacterListLoaded extends CharacterListState {
-  CharacterListLoaded(this.characters);
+  const CharacterListLoaded(this.characters);
 
   final List<CharacterEntity> characters;
   // final bool hasReachedMax;
+  @override
+  List<Object> get props => [characters];
 }
 
-class CharacterListFailure extends CharacterListState {}
+class CharacterListFailure extends CharacterListState {
+  @override
+  List<Object> get props => [];
+}
