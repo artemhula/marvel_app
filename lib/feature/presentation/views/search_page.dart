@@ -9,12 +9,11 @@ import 'package:marvel_app/feature/presentation/widgets/go_back_button.dart';
 import 'package:marvel_app/feature/presentation/widgets/search_field.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+  SearchPage({super.key});
+  Timer? debounce;
 
   @override
   Widget build(BuildContext context) {
-    Timer? debounce;
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -26,10 +25,11 @@ class SearchPage extends StatelessWidget {
         child: Column(
           children: [
             SearchField(function: (query) {
-              if (query.length > 0) {
+              if (query.isNotEmpty) {
                 if (debounce?.isActive ?? false) debounce?.cancel();
                 debounce = Timer(const Duration(milliseconds: 1000), () {
-                  BlocProvider.of<SearchCharacterBloc>(context)
+                  context
+                      .read<SearchCharacterBloc>()
                       .add(LoadSearchCharacter(query));
                 });
               }
@@ -44,6 +44,11 @@ class SearchPage extends StatelessWidget {
                         fontSize: 22, fontWeight: FontWeight.w600),
                   );
                 }
+                if (state is SearchCharacterLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
                 if (state is SearchCharacterLoaded) {
                   if (state.characters.isEmpty) {
                     return Text(
@@ -52,7 +57,6 @@ class SearchPage extends StatelessWidget {
                           fontSize: 22, fontWeight: FontWeight.w600),
                     );
                   }
-
                   return Expanded(
                     child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
@@ -70,23 +74,14 @@ class SearchPage extends StatelessWidget {
                         }),
                   );
                 }
-                if (state is SearchCharacterLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
                 if (state is SearchCharacterFailure) {
                   return Text(
-                    'ERR',
+                    'Error',
                     style: GoogleFonts.inter(
                         fontSize: 22, fontWeight: FontWeight.w600),
                   );
                 }
-                return Text(
-                  'SMTH WENT WRONG',
-                  style: GoogleFonts.inter(
-                      fontSize: 22, fontWeight: FontWeight.w600),
-                );
+                return Container();
               },
             ),
           ],

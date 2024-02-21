@@ -45,7 +45,6 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
         'apikey': publicApiKey,
         'hash': hash,
         'nameStartsWith': query,
-        'limit': '50'
       }),
     );
     Map<String, dynamic> map =

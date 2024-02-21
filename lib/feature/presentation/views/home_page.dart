@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                        builder: (context) => const SearchPage()));
+                        builder: (context) => SearchPage()));
               },
               icon: Padding(
                 padding: const EdgeInsets.only(right: 10),

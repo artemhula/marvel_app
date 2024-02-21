@@ -14,8 +14,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
   Future<Either<Failure, List<CharacterEntity>>> getAllCharacters(
       int offset) async {
     try {
-      final characters =
-          await remoteDataSource.getAllCharacters(offset);
+      final characters = await remoteDataSource.getAllCharacters(offset);
       return Right(characters);
     } on ServerException {
       return Left(ServerFailure());
