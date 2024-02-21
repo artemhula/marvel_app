@@ -10,6 +10,8 @@ class SearchCharacterBloc
     extends Bloc<SearchCharacterEvent, SearchCharacterState> {
   final SearchCharacter searchCharacter;
 
+  List<CharacterEntity> characters = [];
+
   SearchCharacterBloc({required this.searchCharacter})
       : super(SearchCharacterInitial()) {
     on<LoadSearchCharacter>((event, emit) async {

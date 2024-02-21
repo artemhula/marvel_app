@@ -11,4 +11,13 @@ final class LoadSearchCharacter extends SearchCharacterEvent {
   const LoadSearchCharacter(this.query);
 
   final String query;
+  @override
+  List<Object> get props => [query];
+}
+
+final class LoadMoreSearchCharacter extends SearchCharacterEvent {
+  LoadMoreSearchCharacter();
+
+  @override
+  List<Object> get props => [];
 }
