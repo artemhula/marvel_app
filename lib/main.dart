@@ -8,9 +8,9 @@ import 'package:marvel_app/locator_service.dart';
 
 import 'feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeDependencies();
+  await initializeDependencies();
   runApp(const MarvelApp());
 }
 
