@@ -30,7 +30,7 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
     List<CharacterModel> characters = [];
     if (response.statusCode == 200) {
       for (var characterData in map["data"]["results"]) {
-        characters.add(CharacterModel.fromjson(characterData));
+        characters.add(CharacterModel.fromJson(characterData));
       }
       return characters;
     }
@@ -52,7 +52,7 @@ class CharacterRemoteDataSourceImpl implements CharacterRemoteDataSource {
     List<CharacterModel> characters = [];
     if (response.statusCode == 200) {
       for (var characterData in map["data"]["results"]) {
-        characters.add(CharacterModel.fromjson(characterData));
+        characters.add(CharacterModel.fromJson(characterData));
       }
       return characters;
     }

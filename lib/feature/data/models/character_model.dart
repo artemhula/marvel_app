@@ -14,11 +14,11 @@ class CharacterModel extends CharacterEntity {
             image: image,
             url: url);
 
-  factory CharacterModel.fromjson(Map<String, dynamic> json) => CharacterModel(
+  factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
         id: json['id'],
         name: json['name'],
         description: json['description'],
-        image: json['thumbnail']['path'] + '.' + json['thumbnail']['extension'],
+        image: json['image'] ?? json['thumbnail']['path'] + '.' + json['thumbnail']['extension'],
         url: 'google.com',
       );
 
