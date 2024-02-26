@@ -14,13 +14,21 @@ class CharacterModel extends CharacterEntity {
             image: image,
             url: url);
 
-  factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
-        id: json['id'],
-        name: json['name'],
-        description: json['description'],
-        image: json['image'] ?? json['thumbnail']['path'] + '.' + json['thumbnail']['extension'],
-        url: 'google.com',
-      );
+  factory CharacterModel.fromJson(Map<String, dynamic> json) {
+    String image = json['image'] ?? '';
+    if (json.containsKey('thumbnail') &&
+        json['thumbnail'] is Map<String, dynamic>) {
+      image = json['thumbnail']['path'] + '.' + json['thumbnail']['extension'];
+    }
+
+    return CharacterModel(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      image: image,
+      url: 'google.com',
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
