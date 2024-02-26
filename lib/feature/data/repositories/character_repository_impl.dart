@@ -52,7 +52,7 @@ class CharacterRepositoryImpl implements CharacterRepository {
       }
     }
     try {
-      final localCharacters = await localDataSource.getLastCharacters();
+      final localCharacters = await localDataSource.searchCharacters(query);
       return Right(localCharacters);
     } on ServerException {
       return Left(CacheFailure());

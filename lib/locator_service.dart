@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:marvel_app/core/platform/network_info.dart';
 import 'package:marvel_app/feature/data/datasources/character_local_data_source.dart';
@@ -9,7 +11,6 @@ import 'package:marvel_app/feature/domain/usecases/get_all_characters.dart';
 import 'package:marvel_app/feature/domain/usecases/search_character.dart';
 import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
@@ -36,7 +37,8 @@ Future initializeDependencies() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //ext
-  final sp = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sp);
+  await Hive.openBox<Map<String, dynamic>>('characterList');
+  sl.registerLazySingleton(() => Hive.box<Map<String, dynamic>>('characterList'));
+
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }

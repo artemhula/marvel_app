@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/home_page.dart';
 
@@ -10,6 +11,7 @@ import 'feature/presentation/bloc/search_character_bloc/bloc/search_character_bl
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   await initializeDependencies();
   runApp(const MarvelApp());
 }
