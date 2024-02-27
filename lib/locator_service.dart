@@ -3,8 +3,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:marvel_app/core/platform/network_info.dart';
+import 'package:marvel_app/core/util/character_model_adapter.dart';
 import 'package:marvel_app/feature/data/datasources/character_local_data_source.dart';
 import 'package:marvel_app/feature/data/datasources/character_remote_data_source.dart';
+import 'package:marvel_app/feature/data/models/character_model.dart';
 import 'package:marvel_app/feature/data/repositories/character_repository_impl.dart';
 import 'package:marvel_app/feature/domain/repositories/character_repository.dart';
 import 'package:marvel_app/feature/domain/usecases/get_all_characters.dart';
@@ -37,8 +39,9 @@ Future initializeDependencies() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //ext
-  await Hive.openBox<Map<String, dynamic>>('characterList');
-  sl.registerLazySingleton(() => Hive.box<Map<String, dynamic>>('characterList'));
+  Hive.registerAdapter(CharacterModelAdapter());
+  await Hive.openBox<CharacterModel>('characterList');
+  sl.registerLazySingleton(() => Hive.box<CharacterModel>('characterList'));
 
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
