@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CharacterPage extends StatelessWidget {
@@ -37,8 +38,8 @@ class CharacterPage extends StatelessWidget {
                     begin: Alignment.bottomCenter,
                     end: Alignment.center,
                   ).createShader(bounds),
-                  child: Image.network(
-                    image,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.width,

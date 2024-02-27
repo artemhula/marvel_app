@@ -1,8 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:marvel_app/feature/presentation/views/character_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/more_info_button.dart';
-import 'package:shimmer/shimmer.dart';
-
 
 class CharacterCard extends StatelessWidget {
   final String name;
@@ -23,7 +22,10 @@ class CharacterCard extends StatelessWidget {
           isScrollControlled: true,
           builder: (context) {
             return CharacterPage(
-                image: image, name: name, description: description);
+              image: image,
+              name: name,
+              description: description,
+            );
           }),
       child: Container(
         clipBehavior: Clip.antiAlias,
@@ -45,20 +47,12 @@ class CharacterCard extends StatelessWidget {
             SizedBox(
               height: double.infinity,
               width: 150,
-              child: Image.network(
-                image,
-                fit: BoxFit.fitHeight,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    loadingProgress == null
-                        ? child
-                        : Shimmer.fromColors(
-                            baseColor: Colors.grey.shade100,
-                            highlightColor: Colors.grey.shade200,
-                            child: Container(
-                                height: double.infinity,
-                                width: 150,
-                                color: Colors.black),
-                          ),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(
+                        value: progress.progress, color: Colors.red)),
               ),
             ),
             const SizedBox(width: 20),
@@ -104,7 +98,6 @@ class CharacterCard extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: MoreInfoButton(),
                   ),
-
                 ],
               ),
             ),
