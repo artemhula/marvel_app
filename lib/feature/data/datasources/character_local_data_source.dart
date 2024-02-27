@@ -13,6 +13,7 @@ class CharacterLocalDataSourceImpl implements CharacterLocalDataSource {
   CharacterLocalDataSourceImpl(this._box);
   @override
   Future<void> charactersToCache(List<CharacterModel> characters) async {
+    await _box.clear();
     await _box.addAll(characters);
   }
 
