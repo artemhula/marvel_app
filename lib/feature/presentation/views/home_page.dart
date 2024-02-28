@@ -1,32 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/search_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_list_view.dart';
+import 'package:marvel_app/feature/presentation/widgets/favorite_character_list.dart';
 
-enum Route { characters, comics }
+enum HomeRoute { all, favorite }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
-  final _scrollController = ScrollController();
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-  void _setupScrollController(BuildContext context) {
-    _scrollController.addListener(() {
-      if (_scrollController.position.maxScrollExtent ==
-          _scrollController.position.pixels) {
-        final state = context.read<CharacterListBloc>().state;
-        if (state is CharacterListLoaded) {
-          context.read<CharacterListBloc>().add(LoadCharacterList());
-        }
-      }
-    });
-  }
+class _HomePageState extends State<HomePage> {
+  HomeRoute homeRoute = HomeRoute.all;
+
+  final kActiveButtonStyle = ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(Colors.red),
+    foregroundColor: MaterialStateProperty.all(Colors.white),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
+    ),
+  );
+
+  final kDefaultButtonStyle = ButtonStyle(
+    foregroundColor: MaterialStateProperty.all(Colors.black),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
-    _setupScrollController(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,10 +51,8 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20),
             child: IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (context) => SearchPage()));
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (context) => SearchPage()));
               },
               icon: Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -63,31 +69,47 @@ class HomePage extends StatelessWidget {
             Row(
               children: [
                 TextButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                    ),
-                  ),
-                  child: const Text('Popular'),
+                  onPressed: () {
+                    setState(() {
+                      homeRoute = HomeRoute.all;
+                    });
+                  },
+                  style: homeRoute == HomeRoute.all
+                      ? kActiveButtonStyle
+                      : kDefaultButtonStyle,
+                  child: const Text('All'),
                 ),
-                TextButton(onPressed: () {}, child: const Text('A - Z')),
-                TextButton(onPressed: () {}, child: const Text('Last viewed')),
+                const SizedBox(width: 5),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      homeRoute = HomeRoute.favorite;
+                    });
+                  },
+                  style: homeRoute == HomeRoute.favorite
+                      ? kActiveButtonStyle
+                      : kDefaultButtonStyle,
+                  child: const Text('Favorite'),
+                ),
               ],
             ),
             const SizedBox(
               height: 10,
             ),
             Expanded(
-              child: CharacterListView(scrollController: _scrollController),
+              child: _chooseRoute(homeRoute),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _chooseRoute(HomeRoute route) {
+    if (route == HomeRoute.all) {
+      return CharacterListView();
+    } else {
+      return FavoriteCharacterList();
+    }
   }
 }
