@@ -9,7 +9,7 @@ import 'package:marvel_app/feature/presentation/widgets/go_back_button.dart';
 import 'package:marvel_app/feature/presentation/widgets/search_field.dart';
 
 class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
+  SearchPage({Key? key}) : super(key: key);
   Timer? debounce;
 
   @override

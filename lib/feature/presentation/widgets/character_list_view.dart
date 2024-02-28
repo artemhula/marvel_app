@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
@@ -6,15 +5,26 @@ import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/try_again_button.dart';
 
 class CharacterListView extends StatelessWidget {
-  const CharacterListView({
-    super.key,
-    required ScrollController scrollController,
-  }) : _scrollController = scrollController;
+  CharacterListView({super.key});
 
-  final ScrollController _scrollController;
+  void _setupScrollController(BuildContext context) {
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        final state = context.read<CharacterListBloc>().state;
+        if (state is CharacterListLoaded) {
+          context.read<CharacterListBloc>().add(LoadCharacterList());
+        }
+      }
+    });
+  }
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    _setupScrollController(context);
+
     return BlocBuilder<CharacterListBloc, CharacterListState>(
       builder: (context, state) {
         if (state is CharacterListLoading) {
@@ -37,7 +47,8 @@ class CharacterListView extends StatelessWidget {
                   )
                 : const Padding(
                     padding: EdgeInsets.only(top: 30, bottom: 30),
-                    child: Center(child: CircularProgressIndicator(color: Colors.red)),
+                    child: Center(
+                        child: CircularProgressIndicator(color: Colors.red)),
                   ),
           );
         }
@@ -49,9 +60,7 @@ class CharacterListView extends StatelessWidget {
               const Text('Something went wrong'),
               TryAgainButton(
                 function: () {
-                  context
-                      .read<CharacterListBloc>()
-                      .add(LoadCharacterList());
+                  context.read<CharacterListBloc>().add(LoadCharacterList());
                 },
               ),
             ],

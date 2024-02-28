@@ -39,6 +39,7 @@ Future initializeDependencies() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //ext
+  await Hive.initFlutter();
   Hive.registerAdapter(CharacterModelAdapter());
   await Hive.openBox<CharacterModel>('characterList');
   sl.registerLazySingleton(() => Hive.box<CharacterModel>('characterList'));
