@@ -4,12 +4,14 @@ import 'package:marvel_app/feature/presentation/views/character_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/more_info_button.dart';
 
 class CharacterCard extends StatelessWidget {
+  final int id;
   final String name;
   final String description;
   final String image;
 
   const CharacterCard(
       {super.key,
+      required this.id,
       required this.name,
       required this.description,
       required this.image});
@@ -18,15 +20,17 @@ class CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          builder: (context) {
-            return CharacterPage(
-              image: image,
-              name: name,
-              description: description,
-            );
-          }),
+        context: context,
+        isScrollControlled: true,
+        builder: (context) {
+          return CharacterPage(
+            id: id,
+            image: image,
+            name: name,
+            description: description,
+          );
+        },
+      ),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(

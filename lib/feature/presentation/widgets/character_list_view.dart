@@ -41,6 +41,7 @@ class CharacterListView extends StatelessWidget {
             itemCount: state.characters.length + 1,
             itemBuilder: (context, i) => i < state.characters.length
                 ? CharacterCard(
+                    id: state.characters[i].id,
                     name: state.characters[i].name,
                     description: state.characters[i].description,
                     image: state.characters[i].image,
