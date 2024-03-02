@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_app/feature/data/models/character_model.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
@@ -82,8 +83,8 @@ class CharacterPage extends StatelessWidget {
                                 name,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
-                                // style: GoogleFonts.inter(
-                                //     fontSize: 30, fontWeight: FontWeight.w800),
+                                style: GoogleFonts.inter(
+                                    fontSize: 30, fontWeight: FontWeight.w800),
                               ),
                             ),
                             GestureDetector(
@@ -119,11 +120,10 @@ class CharacterPage extends StatelessWidget {
                           description == ''
                               ? 'There is no description'
                               : description,
-                          // style: GoogleFonts.inter(
-                          //     fontSize: 16,
-                          //     fontWeight: FontWeight.w500,
-                          //     color: Colors.black54),
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black54),
                         ),
                         const SizedBox(
                           height: 100,

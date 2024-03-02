@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/character_page.dart';
@@ -85,24 +86,21 @@ class CharacterCard extends StatelessWidget {
                           name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          //bodymedium
-                          // style: GoogleFonts.inter(
-                          //   color: Colors.black,
-                          //   fontWeight: FontWeight.w800,
-                          //   fontSize: 26,
-                          // ),
+                          style: GoogleFonts.inter(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 26,
+                          ),
                         ),
                         Text(
                           description,
                           textAlign: TextAlign.left,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          //body
-                          style: Theme.of(context).textTheme.bodySmall,
-                          // style: GoogleFonts.inter(
-                          //     color: Colors.grey,
-                          //     fontSize: 14,
-                          //     fontWeight: FontWeight.w700),
+                          style: GoogleFonts.inter(
+                              color: Colors.grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),

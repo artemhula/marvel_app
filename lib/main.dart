@@ -5,7 +5,6 @@ import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/fav
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/home_page.dart';
 
-import 'package:marvel_app/theme.dart';
 import 'package:marvel_app/locator_service.dart';
 
 import 'feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
@@ -37,7 +36,6 @@ class MarvelApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: theme,
         debugShowCheckedModeBanner: false,
         home: HomePage(),
       ),
