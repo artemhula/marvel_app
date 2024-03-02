@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/try_again_button.dart';
@@ -18,7 +19,12 @@ class FavoriteCharacterList extends StatelessWidget {
         }
         if (state is FavoriteCharacterListLoaded) {
           if (state.characters.isEmpty) {
-            return Center(child: Text('Favorite character list is empty'));
+            return Center(
+                child: Text(
+              'Favorite character list is empty',
+              style:
+                  GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w700),
+            ));
           }
           return ListView.separated(
               physics: const BouncingScrollPhysics(),
@@ -37,8 +43,11 @@ class FavoriteCharacterList extends StatelessWidget {
           return Center(
             child: Column(
               children: [
-                const Text('Error'),
-                const Text('Something went wrong'),
+                Text(
+                  'Something went wrong',
+                  style: GoogleFonts.inter(
+                      fontSize: 22, fontWeight: FontWeight.w700),
+                ),
                 TryAgainButton(function: () {
                   context
                       .read<FavoriteCharacterListBloc>()

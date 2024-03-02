@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/character_page.dart';
@@ -55,12 +56,12 @@ class CharacterCard extends StatelessWidget {
             )
           ],
         ),
-        height: 210,
+        height: 230,
         child: Row(
           children: [
             SizedBox(
               height: double.infinity,
-              width: 150,
+              width: 160,
               child: CachedNetworkImage(
                 imageUrl: image,
                 fit: BoxFit.cover,
@@ -86,21 +87,14 @@ class CharacterCard extends StatelessWidget {
                           name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 26,
-                          ),
+                          style: kLargeTextStyle,
                         ),
                         Text(
                           description,
                           textAlign: TextAlign.left,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.inter(
-                              color: Colors.grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700),
+                          style: kSmallTextStyle,
                         ),
                       ],
                     ),

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/go_back_button.dart';
@@ -10,10 +10,10 @@ import 'package:marvel_app/feature/presentation/widgets/search_field.dart';
 
 class SearchPage extends StatelessWidget {
   SearchPage({Key? key}) : super(key: key);
-  Timer? debounce;
 
   @override
   Widget build(BuildContext context) {
+    Timer? debounce;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -38,29 +38,36 @@ class SearchPage extends StatelessWidget {
             BlocBuilder<SearchCharacterBloc, SearchCharacterState>(
               builder: (context, state) {
                 if (state is SearchCharacterInitial) {
-                  return Text(
-                    'Who are we looking for?',
-                    style: GoogleFonts.inter(
-                        fontSize: 22, fontWeight: FontWeight.w600),
+                  return Expanded(
+                    child: Center(
+                      child: Text(
+                        'Who are we looking for?',
+                        style: kMediumTextStyle,
+                      ),
+                    ),
                   );
                 }
                 if (state is SearchCharacterLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(color: Colors.red),
+                    ),
                   );
                 }
                 if (state is SearchCharacterLoaded) {
                   if (state.characters.isEmpty) {
-                    return Text(
-                      'Character not found',
-                      style: GoogleFonts.inter(
-                          fontSize: 22, fontWeight: FontWeight.w600),
+                    return Expanded(
+                      child: Center(
+                        child: Text(
+                          'Character not found',
+                          style: kMediumTextStyle,
+                        ),
+                      ),
                     );
                   }
                   return Expanded(
                     child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
-                        // controller: _scrollController,
                         separatorBuilder: (context, index) => const SizedBox(
                               height: 10,
                             ),
@@ -78,8 +85,7 @@ class SearchPage extends StatelessWidget {
                 if (state is SearchCharacterFailure) {
                   return Text(
                     'Error',
-                    style: GoogleFonts.inter(
-                        fontSize: 22, fontWeight: FontWeight.w600),
+                    style: kMediumTextStyle,
                   );
                 }
                 return Container();

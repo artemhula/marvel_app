@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/search_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_list_view.dart';
@@ -9,7 +10,7 @@ import 'package:marvel_app/feature/presentation/widgets/favorite_character_list.
 enum HomeRoute { all, favorite }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,23 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   HomeRoute homeRoute = HomeRoute.all;
-
-  final kActiveButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(Colors.red),
-    foregroundColor: MaterialStateProperty.all(Colors.white),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
-    ),
-  );
-
-  final kDefaultButtonStyle = ButtonStyle(
-    foregroundColor: MaterialStateProperty.all(Colors.black),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {

@@ -29,7 +29,8 @@ class CharacterListView extends StatelessWidget {
       builder: (context, state) {
         if (state is CharacterListLoading) {
           return const Center(
-              child: CircularProgressIndicator(color: Colors.red));
+            child: CircularProgressIndicator(color: Colors.red),
+          );
         }
         if (state is CharacterListLoaded) {
           return ListView.separated(

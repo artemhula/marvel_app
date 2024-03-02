@@ -14,7 +14,7 @@ class MoreInfoButton extends StatelessWidget {
         Text(
           "More info",
           style: GoogleFonts.inter(
-              color: Colors.black87, fontSize: 17, fontWeight: FontWeight.w800),
+              color: Colors.black87, fontSize: 17, fontWeight: FontWeight.w700),
         ),
         Image.asset('assets/icons/right-arrow.png', width: 22)
       ],

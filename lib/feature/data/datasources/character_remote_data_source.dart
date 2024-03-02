@@ -1,4 +1,4 @@
-import 'package:marvel_app/constants.dart';
+import 'package:marvel_app/core/constants/api_constants.dart';
 import 'package:marvel_app/core/error/exception.dart';
 import 'package:marvel_app/feature/data/models/character_model.dart';
 import 'dart:convert';
