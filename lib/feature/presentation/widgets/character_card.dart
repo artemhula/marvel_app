@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/character_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/more_info_button.dart';
 
@@ -19,18 +22,24 @@ class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (context) {
-          return CharacterPage(
-            id: id,
-            image: image,
-            name: name,
-            description: description,
-          );
-        },
-      ),
+      onTap: () async {
+        await showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            context.read<FavoriteCharacterBloc>().add(CheckCharacter(id: id));
+            return CharacterPage(
+              id: id,
+              image: image,
+              name: name,
+              description: description,
+            );
+          },
+        );
+        context
+            .read<FavoriteCharacterListBloc>()
+            .add(GetFavoriteCharacterList());
+      },
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(

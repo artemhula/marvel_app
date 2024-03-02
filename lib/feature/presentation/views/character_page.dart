@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/feature/data/models/character_model.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 
 class CharacterPage extends StatelessWidget {
   const CharacterPage({
@@ -22,9 +23,6 @@ class CharacterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FavoriteCharacterBloc, FavoriteCharacterState>(
       builder: (context, state) {
-        if (state is FavoriteCharacterInitial) {
-          context.read<FavoriteCharacterBloc>().add(CheckCharacter(id: id));
-        }
         if (state is FavoriteCharacterLoading) {
           return const Center(
               child: CircularProgressIndicator(color: Colors.red));
@@ -91,13 +89,16 @@ class CharacterPage extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 context.read<FavoriteCharacterBloc>().add(
-                                    ToggleCharacter(
+                                      ToggleCharacter(
                                         character: CharacterModel(
-                                            id: id,
-                                            name: name,
-                                            description: description,
-                                            image: image,
-                                            url: 'google.com')));
+                                          id: id,
+                                          name: name,
+                                          description: description,
+                                          image: image,
+                                          url: 'google.com',
+                                        ),
+                                      ),
+                                    );
                               },
                               child: state.isFavorite
                                   ? const Icon(
@@ -136,8 +137,7 @@ class CharacterPage extends StatelessWidget {
           );
         }
         if (state is FavoriteCharacterFailure) {
-          return const Center(
-              child: Text('failure'));
+          return const Center(child: Text('failure'));
         }
         return Container();
       },
