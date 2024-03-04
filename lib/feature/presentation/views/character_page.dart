@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/data/models/character_model.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
@@ -97,7 +96,6 @@ class CharacterPage extends StatelessWidget {
                                           name: name,
                                           description: description,
                                           image: image,
-                                          url: 'google.com',
                                         ),
                                       ),
                                     );

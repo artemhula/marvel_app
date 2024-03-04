@@ -6,13 +6,12 @@ class CharacterModel extends CharacterEntity {
     required name,
     required description,
     required image,
-    required url,
   }) : super(
-            id: id,
-            name: name,
-            description: description,
-            image: image,
-            url: url);
+          id: id,
+          name: name,
+          description: description,
+          image: image,
+        );
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
         id: json['id'],
@@ -20,7 +19,6 @@ class CharacterModel extends CharacterEntity {
         description: json['description'],
         image: json['image'] ??
             json['thumbnail']['path'] + '.' + json['thumbnail']['extension'],
-        url: 'google.com',
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +26,5 @@ class CharacterModel extends CharacterEntity {
         'name': name,
         'description': description,
         'image': image,
-        'url': url,
       };
 }

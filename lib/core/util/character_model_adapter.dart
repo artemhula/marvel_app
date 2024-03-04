@@ -12,7 +12,6 @@ class CharacterModelAdapter extends TypeAdapter<CharacterModel> {
       name: reader.readString(),
       description: reader.readString(),
       image: reader.readString(),
-      url: reader.readString(),
     );
   }
 
@@ -22,6 +21,5 @@ class CharacterModelAdapter extends TypeAdapter<CharacterModel> {
     writer.writeString(obj.name);
     writer.writeString(obj.description);
     writer.writeString(obj.image);
-    writer.writeString(obj.url);
   }
 }
