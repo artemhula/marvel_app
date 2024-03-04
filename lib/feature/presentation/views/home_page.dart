@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
 import 'package:marvel_app/feature/presentation/views/search_page.dart';
-import 'package:marvel_app/feature/presentation/widgets/character_list_view.dart';
+import 'package:marvel_app/feature/presentation/widgets/character_list.dart';
 import 'package:marvel_app/feature/presentation/widgets/favorite_character_list.dart';
 
 enum HomeRoute { all, favorite }
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _chooseRoute(HomeRoute route) {
     if (route == HomeRoute.all) {
-      return CharacterListView();
+      return CharacterList();
     } else {
       context.read<FavoriteCharacterListBloc>().add(GetFavoriteCharacterList());
       return FavoriteCharacterList();

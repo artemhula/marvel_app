@@ -4,8 +4,8 @@ import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/charact
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/try_again_button.dart';
 
-class CharacterListView extends StatelessWidget {
-  CharacterListView({super.key});
+class CharacterList extends StatelessWidget {
+  CharacterList({super.key});
 
   void _setupScrollController(BuildContext context) {
     _scrollController.addListener(() {
