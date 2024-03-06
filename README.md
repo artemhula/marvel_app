@@ -1,16 +1,7 @@
-# marvel_app
+# Marvel App
 
-A new Flutter project.
+Сopied the design from [here](https://dribbble.com/shots/4985712-Marvel-Heroes-Library)
+You can download APK from this [link](https://drive.google.com/file/d/1kf1g7FI7mRQdr1iFzuyZ1q7at_ysifoX/view?usp=sharing)
 
-## Getting Started
+https://github.com/artemhula/marvelapp/assets/66064927/a09eb73e-395b-475a-8fad-019511c9f36c
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
