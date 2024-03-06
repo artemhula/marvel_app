@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_cubit/favorite_character_list_cubit.dart';
 import 'package:marvel_app/feature/presentation/views/search_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_list.dart';
 import 'package:marvel_app/feature/presentation/widgets/favorite_character_list.dart';
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
     if (route == HomeRoute.all) {
       return CharacterList();
     } else {
-      context.read<FavoriteCharacterListBloc>().add(GetFavoriteCharacterList());
+      context.read<FavoriteCharacterListCubit>().getFavoriteCharacterList();
       return FavoriteCharacterList();
     }
   }

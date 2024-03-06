@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/search_character_cubit/search_character_cubit.dart';
 import 'package:marvel_app/feature/presentation/widgets/go_back_button.dart';
 import 'package:marvel_app/feature/presentation/widgets/search_character_list.dart';
 import 'package:marvel_app/feature/presentation/widgets/search_field.dart';
@@ -28,8 +28,8 @@ class SearchPage extends StatelessWidget {
                 if (debounce?.isActive ?? false) debounce?.cancel();
                 debounce = Timer(const Duration(milliseconds: 1000), () {
                   context
-                      .read<SearchCharacterBloc>()
-                      .add(LoadSearchCharacter(query));
+                      .read<SearchCharacterCubit>()
+                      .loadSearchCharacter(query);
                 });
               }
             }),

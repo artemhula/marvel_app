@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_cubit/favorite_character_list_cubit.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/try_again_button.dart';
 
@@ -10,7 +10,7 @@ class FavoriteCharacterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCharacterListBloc, FavoriteCharacterListState>(
+    return BlocBuilder<FavoriteCharacterListCubit, FavoriteCharacterListState>(
       builder: (context, state) {
         if (state is FavoriteCharacterListLoading) {
           return const Center(
@@ -50,8 +50,8 @@ class FavoriteCharacterList extends StatelessWidget {
                 ),
                 TryAgainButton(function: () {
                   context
-                      .read<FavoriteCharacterListBloc>()
-                      .add(GetFavoriteCharacterList());
+                      .read<FavoriteCharacterListCubit>()
+                      .getFavoriteCharacterList();
                 }),
               ],
             ),

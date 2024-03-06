@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/character_list_cubit/character_list_cubit.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 import 'package:marvel_app/feature/presentation/widgets/try_again_button.dart';
 
@@ -11,9 +11,9 @@ class CharacterList extends StatelessWidget {
     _scrollController.addListener(() {
       if (_scrollController.position.maxScrollExtent ==
           _scrollController.position.pixels) {
-        final state = context.read<CharacterListBloc>().state;
+        final state = context.read<CharacterListCubit>().state;
         if (state is CharacterListLoaded) {
-          context.read<CharacterListBloc>().add(LoadCharacterList());
+          context.read<CharacterListCubit>().loadCharacters();
         }
       }
     });
@@ -25,7 +25,7 @@ class CharacterList extends StatelessWidget {
   Widget build(BuildContext context) {
     _setupScrollController(context);
 
-    return BlocBuilder<CharacterListBloc, CharacterListState>(
+    return BlocBuilder<CharacterListCubit, CharacterListState>(
       builder: (context, state) {
         if (state is CharacterListLoading) {
           return const Center(
@@ -62,7 +62,7 @@ class CharacterList extends StatelessWidget {
               const Text('Something went wrong'),
               TryAgainButton(
                 function: () {
-                  context.read<CharacterListBloc>().add(LoadCharacterList());
+                  context.read<CharacterListCubit>().loadCharacters();
                 },
               ),
             ],

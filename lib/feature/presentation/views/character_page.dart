@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
 import 'package:marvel_app/feature/data/models/character_model.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_cubit/favorite_character_cubit.dart';
 
 class CharacterPage extends StatelessWidget {
   const CharacterPage({
@@ -21,7 +21,7 @@ class CharacterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCharacterBloc, FavoriteCharacterState>(
+    return BlocBuilder<FavoriteCharacterCubit, FavoriteCharacterState>(
       builder: (context, state) {
         if (state is FavoriteCharacterLoading) {
           return const Expanded(
@@ -89,14 +89,14 @@ class CharacterPage extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                context.read<FavoriteCharacterBloc>().add(
-                                      ToggleCharacter(
-                                        character: CharacterModel(
-                                          id: id,
-                                          name: name,
-                                          description: description,
-                                          image: image,
-                                        ),
+                                context
+                                    .read<FavoriteCharacterCubit>()
+                                    .toggleCharacter(
+                                      CharacterModel(
+                                        id: id,
+                                        name: name,
+                                        description: description,
+                                        image: image,
                                       ),
                                     );
                               },

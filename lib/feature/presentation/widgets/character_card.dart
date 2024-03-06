@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_cubit/favorite_character_cubit.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_cubit/favorite_character_list_cubit.dart';
 import 'package:marvel_app/feature/presentation/views/character_page.dart';
 import 'package:marvel_app/feature/presentation/widgets/more_info_button.dart';
 
@@ -28,7 +28,7 @@ class CharacterCard extends StatelessWidget {
           context: context,
           isScrollControlled: true,
           builder: (context) {
-            context.read<FavoriteCharacterBloc>().add(CheckCharacter(id: id));
+            context.read<FavoriteCharacterCubit>().checkCharacter(id);
             return CharacterPage(
               id: id,
               image: image,
@@ -37,9 +37,7 @@ class CharacterCard extends StatelessWidget {
             );
           },
         );
-        context
-            .read<FavoriteCharacterListBloc>()
-            .add(GetFavoriteCharacterList());
+        context.read<FavoriteCharacterListCubit>().getFavoriteCharacterList();
       },
       child: Container(
         clipBehavior: Clip.antiAlias,

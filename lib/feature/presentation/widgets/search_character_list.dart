@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/core/constants/style_constants.dart';
-import 'package:marvel_app/feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/search_character_cubit/search_character_cubit.dart';
 import 'package:marvel_app/feature/presentation/widgets/character_card.dart';
 
 class SearchCharacterList extends StatelessWidget {
@@ -12,7 +12,7 @@ class SearchCharacterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchCharacterBloc, SearchCharacterState>(
+    return BlocBuilder<SearchCharacterCubit, SearchCharacterState>(
       builder: (context, state) {
         if (state is SearchCharacterInitial) {
           return Expanded(
