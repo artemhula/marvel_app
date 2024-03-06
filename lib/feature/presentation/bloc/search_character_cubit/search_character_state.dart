@@ -1,4 +1,4 @@
-part of 'search_character_bloc.dart';
+part of 'search_character_cubit.dart';
 
 sealed class SearchCharacterState extends Equatable {
   const SearchCharacterState();

@@ -1,4 +1,4 @@
-part of 'favorite_character_bloc.dart';
+part of 'favorite_character_cubit.dart';
 
 sealed class FavoriteCharacterState extends Equatable {
   const FavoriteCharacterState();

@@ -13,25 +13,25 @@ import 'package:marvel_app/feature/domain/usecases/get_all_characters.dart';
 import 'package:marvel_app/feature/domain/usecases/get_favorite_characters.dart';
 import 'package:marvel_app/feature/domain/usecases/search_character.dart';
 import 'package:marvel_app/feature/domain/usecases/toogle_favorite_character.dart';
-import 'package:marvel_app/feature/presentation/bloc/character_list_bloc/character_list_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_bloc/favorite_character_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_bloc/favorite_character_list_bloc.dart';
-import 'package:marvel_app/feature/presentation/bloc/search_character_bloc/bloc/search_character_bloc.dart';
+import 'package:marvel_app/feature/presentation/bloc/character_list_cubit/character_list_cubit.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_cubit/favorite_character_cubit.dart';
+import 'package:marvel_app/feature/presentation/bloc/favorite_character_list_cubit/favorite_character_list_cubit.dart';
+import 'package:marvel_app/feature/presentation/bloc/search_character_cubit/search_character_cubit.dart';
 
 final sl = GetIt.instance;
 
 Future initializeDependencies() async {
   //bloc
-  sl.registerFactory<CharacterListBloc>(
-      () => CharacterListBloc(getAllCharacters: sl()));
-  sl.registerFactory<SearchCharacterBloc>(
-      () => SearchCharacterBloc(searchCharacter: sl()));
-  sl.registerFactory<FavoriteCharacterBloc>(() => FavoriteCharacterBloc(
+  sl.registerFactory<CharacterListCubit>(
+      () => CharacterListCubit(getAllCharacters: sl()));
+  sl.registerFactory<SearchCharacterCubit>(
+      () => SearchCharacterCubit(searchCharacter: sl()));
+  sl.registerFactory<FavoriteCharacterCubit>(() => FavoriteCharacterCubit(
         toggleFavoriteCharacter: sl(),
         checkFavoriteCharacter: sl(),
       ));
-  sl.registerFactory<FavoriteCharacterListBloc>(
-      () => FavoriteCharacterListBloc(getFavoriteCharacters: sl()));
+  sl.registerFactory<FavoriteCharacterListCubit>(
+      () => FavoriteCharacterListCubit(getFavoriteCharacters: sl()));
 
   //usecases
   sl.registerLazySingleton(() => SearchCharacter(sl()));
@@ -45,11 +45,11 @@ Future initializeDependencies() async {
       remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CharacterRemoteDataSource>(
       () => CharacterRemoteDataSourceImpl());
-  sl.registerLazySingleton<CharacterLocalDataSource>(() =>
-      CharacterLocalDataSourceImpl(
-        sl.get<Box<CharacterModel>>(instanceName: 'charactersBox'),
-        sl.get<Box<CharacterModel>>(instanceName: 'favoriteCharactersBox'),
-      ));
+  sl.registerLazySingleton<CharacterLocalDataSource>(
+      () => CharacterLocalDataSourceImpl(
+            sl.get<Box<CharacterModel>>(instanceName: 'charactersBox'),
+            sl.get<Box<CharacterModel>>(instanceName: 'favoriteCharactersBox'),
+          ));
 
   //core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -61,8 +61,7 @@ Future initializeDependencies() async {
   sl.registerLazySingleton(() => Hive.box<CharacterModel>('characters'),
       instanceName: 'charactersBox');
   await Hive.openBox<CharacterModel>('favoriteCharacters');
-  sl.registerLazySingleton(
-      () => Hive.box<CharacterModel>('favoriteCharacters'),
+  sl.registerLazySingleton(() => Hive.box<CharacterModel>('favoriteCharacters'),
       instanceName: 'favoriteCharactersBox');
 
   sl.registerLazySingleton(() => InternetConnectionChecker());
