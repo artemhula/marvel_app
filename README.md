@@ -31,11 +31,11 @@ This Flutter application interacts with the Marvel Comics API to display informa
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/marvel-app.git
+   git clone https://github.com/artemhula/marvel_app.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd marvel-app
+   cd marvel_app
    ```
 3. Install the necessary dependencies:
    ```bash
